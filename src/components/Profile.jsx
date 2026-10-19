@@ -5,8 +5,19 @@ import { useGSAP } from "@gsap/react";
 import Lenis from "lenis";
 import { content } from "../content";
 import { Icon } from "../icons";
+import profileImage from "../assets/profile.jpg";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+// Framed portrait that matches the "stack panel" aesthetic.
+const Portrait = ({ alt, className = "" }) => (
+  <div
+    className={`relative overflow-hidden rounded-[1.4rem] border border-hair bg-surface ${className}`}
+    style={{ boxShadow: "0 0 0 1px rgba(77,141,255,0.15), 0 24px 60px -24px rgba(77,141,255,0.45)" }}
+  >
+    <img src={profileImage} alt={alt} className="h-full w-full object-cover object-top" />
+  </div>
+);
 
 const Eyebrow = ({ children }) => (
   <span className="mono-label inline-flex items-center gap-2">
@@ -256,6 +267,7 @@ const Profile = () => {
         {prefersReduced ? (
           /* ===== Static, readable fallback ===== */
           <section className="mx-auto max-w-shell px-6 pb-16 pt-32 md:px-10">
+            <Portrait alt={copy.hero.portraitAlt} className="mb-8 h-44 w-36" />
             <Eyebrow>{copy.hero.eyebrow}</Eyebrow>
             <h1 className="mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">{copy.hero.name}</h1>
             <p className="mt-4 text-2xl font-medium text-fg-muted sm:text-3xl">
@@ -293,8 +305,9 @@ const Profile = () => {
 
               {/* Intro overlay — fades out as the stack takes over */}
               <div className="intro pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center">
+                <Portrait alt={copy.hero.portraitAlt} className="mb-7 h-40 w-[8.5rem] sm:h-48 sm:w-40" />
                 <Eyebrow>{copy.hero.eyebrow}</Eyebrow>
-                <h1 className="mt-6 text-[2.8rem] font-bold leading-[1.02] tracking-tight sm:text-7xl">{copy.hero.name}</h1>
+                <h1 className="mt-5 text-[2.6rem] font-bold leading-[1.02] tracking-tight sm:text-6xl">{copy.hero.name}</h1>
                 <p className="mt-4 text-2xl font-medium text-fg-muted sm:text-3xl">
                   {copy.hero.tagline[0]} <span className="text-warm">{copy.hero.tagline[1]}</span>
                 </p>
