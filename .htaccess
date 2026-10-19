@@ -1,0 +1,13 @@
+Options -Indexes
+RewriteEngine On
+
+# قدّم الملفات الفعلية كما هي
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# React Router fallback
+RewriteRule ^ build/index.html [L]
+
+DirectoryIndex build/index.html
+
