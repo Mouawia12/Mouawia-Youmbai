@@ -1,15 +1,76 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Cairo:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html,
-body,
-#root {
-  height: 100%;
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 bg-ink text-fg font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Visible keyboard focus everywhere (logical, direction-agnostic). */
+  :focus-visible {
+    outline: 2px solid theme("colors.signal");
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: theme("colors.signal");
+    color: theme("colors.ink");
+  }
 }
 
-body {
-  @apply m-0 bg-brand-dark text-white font-sans antialiased;
+@layer components {
+  /* Engineering blueprint grid — the "schematic" texture behind the hero. */
+  .blueprint-grid {
+    background-image: linear-gradient(theme("colors.hair") 1px, transparent 1px),
+      linear-gradient(90deg, theme("colors.hair") 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%);
+  }
+
+  .mono-label {
+    @apply font-mono text-xs tracking-[0.18em] text-signal;
+  }
+
+  /* The compile scanline that sweeps the portrait once on load. */
+  .scanline {
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(77, 141, 255, 0.55) 48%,
+      rgba(77, 141, 255, 0.9) 50%,
+      rgba(77, 141, 255, 0.55) 52%,
+      transparent
+    );
+  }
+}
+
+/* Motion is opt-in to attention only — honor reduced-motion with a static fallback. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
