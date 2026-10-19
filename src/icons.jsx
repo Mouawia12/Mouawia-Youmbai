@@ -41,6 +41,20 @@ export const Icon = {
       <circle cx="12" cy="18" r="1" fill="currentColor" stroke="none" />
     </svg>
   ),
+  server: (p) => (
+    <svg {...base} {...p}>
+      <rect x="3" y="4" width="18" height="7" rx="1.5" />
+      <rect x="3" y="13" width="18" height="7" rx="1.5" />
+      <path d="M7 7.5h.01M7 16.5h.01" />
+    </svg>
+  ),
+  database: (p) => (
+    <svg {...base} {...p}>
+      <ellipse cx="12" cy="5.5" rx="8" ry="3" />
+      <path d="M4 5.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" />
+      <path d="M4 11.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" />
+    </svg>
+  ),
   pin: (p) => (
     <svg {...base} {...p}>
       <path d="M12 21s-6-5.3-6-10a6 6 0 1 1 12 0c0 4.7-6 10-6 10Z" />

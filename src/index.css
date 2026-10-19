@@ -58,6 +58,73 @@
       transparent
     );
   }
+
+  /* Scroll theater — sticky 3D scene whose central actor builds with progress. */
+  .scene {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .stage-3d {
+    perspective: 1500px;
+    perspective-origin: 50% 42%;
+  }
+  .tower,
+  .slab {
+    transform-style: preserve-3d;
+  }
+  .slab {
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+  }
+  .scroll-dot {
+    animation: scroll-dot 1.6s theme("transitionTimingFunction.cine") infinite;
+  }
+  @keyframes scroll-dot {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    35% {
+      opacity: 1;
+    }
+    70% {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Stack rail — the active architectural layer lights up with scroll. */
+  .rail-label {
+    color: theme("colors.fg-faint");
+    opacity: 0.5;
+    transition: color 0.45s theme("transitionTimingFunction.cine"),
+      opacity 0.45s ease, letter-spacing 0.45s ease;
+  }
+  .rail-label.is-active {
+    color: theme("colors.signal");
+    opacity: 1;
+    letter-spacing: 0.26em;
+  }
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 /* Motion is opt-in to attention only — honor reduced-motion with a static fallback. */
